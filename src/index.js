@@ -7,7 +7,7 @@ function expressionCalculator(expr) {
     expr = expr.replace(/\s/g, '');
     expr = expr.split('');
     let expArrayTrim = [];
-    let element = [];
+    let element = '';
 //делаем массив без пробелов с помощью регулярных выражений
     for (let i = 0; i < expr.length; i++) {
         if (expr[i].match(/[0-9]/)) {
