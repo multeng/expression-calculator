@@ -8,11 +8,16 @@ function expressionCalculator(expr) {
     expr = expr.split('');
     let expArrayTrim = [];
     let element = '';
-//делаем массив без пробелов с помощью регулярных выражений
+    //делаем массив без пробелов с помощью регулярных выражений
     for (let i = 0; i < expr.length; i++) {
         if (expr[i].match(/[0-9]/)) {
             element = element + expr[i];
-            continue;
+            if (i === expr.length - 1) {
+                expArrayTrim.push(parseInt(element))
+                element = [];
+            } else {
+                continue;
+            }
         }
         if (element.length > 0) {
             expArrayTrim.push(parseInt(element))
@@ -22,13 +27,8 @@ function expressionCalculator(expr) {
             expArrayTrim.push(expr[i]);
         }
     }
-    if (element.length > 0) {
-        expArrayTrim.push(parseInt(element))
-        element = [];
-    }
 
-
-// проверяем закрывающиеся и открывающиеся скобки
+    // проверяем закрывающиеся и открывающиеся скобки
     let openBrackets = 0;
     let closeBrackets = 0;
     for (let index = 0; index < expArrayTrim.length; index++) {
@@ -103,7 +103,7 @@ function expressionCalculator(expr) {
         array.splice(openBracket, elements + 1, arrayForOperation);
         return array;
     }
-// считаем выражения в скобках пока они есть, если скобки кончаются то считаем обычное выражение
+    // считаем выражения в скобках пока они есть, если скобки кончаются то считаем обычное выражение
     while (expArrayTrim.includes('(')) {
         expArrayTrim = makeOperationInBracket(expArrayTrim);
     }
